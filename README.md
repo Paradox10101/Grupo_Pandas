@@ -1,110 +1,112 @@
 # Grupo_Pandas
 
-YOLO TrashNet
+## YOLO TrashNet
 
-Descripción
+### Descripción
 YOLO TrashNet es un proyecto que utiliza el modelo de detección de objetos YOLOv8 para clasificar y detectar diferentes tipos de basura en imágenes. El objetivo del proyecto es entrenar un modelo que pueda identificar diversos tipos de desechos para ayudar en la clasificación automática y eficiente de basura.
 
-Requisitos Previos
+### Requisitos Previos
+- Python 3.6+
+- numpy
+- pandas
+- matplotlib
+- opencv-python
+- google-colab (si usas Google Colab)
+- ultralytics (biblioteca YOLO)
 
-Python 3.6+
-numpy
-pandas
-matplotlib
-opencv-python
-google-colab (si usas Google Colab)
-ultralytics (biblioteca YOLO)
-Instalación
+### Instalación
 Sigue estos pasos para instalar y configurar el entorno de trabajo:
 
-Clona este repositorio:
+1. Clona este repositorio:
+    ```sh
+    git clone https://github.com/tu_usuario/YOLO_TrashNet.git
+    ```
 
+2. Navega al directorio del proyecto:
+    ```sh
+    cd YOLO_TrashNet
+    ```
 
-git clone https://github.com/tu_usuario/YOLO_TrashNet.git
-Navega al directorio del proyecto:
+3. Instala las dependencias:
+    ```sh
+    pip install -r requirements.txt
+    ```
 
-sh
-Copiar código
-cd YOLO_TrashNet
-Instala las dependencias:
-
-sh
-Copiar código
-pip install -r requirements.txt
-Uso
+### Uso
 A continuación se describen los pasos para entrenar y utilizar el modelo YOLOv8 para detectar basura en imágenes.
 
-Entrenamiento del Modelo
-Monta tu Google Drive para acceder al conjunto de datos (si usas Google Colab):
+#### Entrenamiento del Modelo
+1. Monta tu Google Drive para acceder al conjunto de datos (si usas Google Colab):
+    ```python
+    from google.colab import drive
+    drive.mount('/content/drive')
+    ```
 
-python
-Copiar código
-from google.colab import drive
-drive.mount('/content/drive')
-Descomprime el conjunto de datos:
+2. Descomprime el conjunto de datos:
+    ```sh
+    !unzip 'drive/MyDrive/dataset.zip'
+    ```
 
-sh
-Copiar código
-!unzip 'drive/MyDrive/dataset.zip'
-Instala la biblioteca ultralytics:
+3. Instala la biblioteca ultralytics:
+    ```sh
+    !pip install ultralytics
+    ```
 
-sh
-Copiar código
-!pip install ultralytics
-Verifica que el directorio de entrenamiento existe:
+4. Verifica que el directorio de entrenamiento existe:
+    ```python
+    import os
+    directory_path = '/content/train'
+    if os.path.exists(directory_path):
+        print("El directorio existe.")
+    else:
+        print("El directorio no existe.")
+    ```
 
-python
-Copiar código
-import os
-directory_path = '/content/train'
-if os.path.exists(directory_path):
-print("El directorio existe.")
-else:
-print("El directorio no existe.")
-Carga y entrena el modelo:
+5. Carga y entrena el modelo:
+    ```python
+    from ultralytics import YOLO
+    model = YOLO("yolov8n.yaml") # Crear un nuevo modelo desde cero
+    model.train(data="config.yaml", epochs=100) # Entrenar el modelo
+    metrics = model.val() # Evaluar el rendimiento del modelo en el conjunto de validación
+    ```
 
-python
-Copiar código
-from ultralytics import YOLO
-model = YOLO("yolov8n.yaml") # Crear un nuevo modelo desde cero
-model.train(data="config.yaml", epochs=100) # Entrenar el modelo
-metrics = model.val() # Evaluar el rendimiento del modelo en el conjunto de validación
-Predicción con el Modelo
-Realiza predicciones en una imagen:
+#### Predicción con el Modelo
+1. Realiza predicciones en una imagen:
+    ```python
+    results = model("ruta_a_tu_imagen.jpg")
+    ```
 
-python
-Copiar código
-results = model("ruta_a_tu_imagen.jpg")
-Exporta el modelo a formato ONNX:
+2. Exporta el modelo a formato ONNX:
+    ```python
+    path = model.export(format="onnx")
+    ```
 
-python
-Copiar código
-path = model.export(format="onnx")
-Muestra las predicciones en la imagen:
+3. Muestra las predicciones en la imagen:
+    ```python
+    import matplotlib.pyplot as plt
+    import cv2
+    if results and isinstance(results, list):
+        for result in results:
+            img_with_boxes = result.plot()
+            img_with_boxes_rgb = cv2.cvtColor(img_with_boxes, cv2.COLOR_BGR2RGB)
+            plt.imshow(img_with_boxes_rgb)
+            plt.axis('off')
+            plt.show()
+    else:
+        print("No se encontraron resultados.")
+    ```
 
-python
-Copiar código
-import matplotlib.pyplot as plt
-import cv2
-if results and isinstance(results, list):
-for result in results:
-img_with_boxes = result.plot()
-img_with_boxes_rgb = cv2.cvtColor(img_with_boxes, cv2.COLOR_BGR2RGB)
-plt.imshow(img_with_boxes_rgb)
-plt.axis('off')
-plt.show()
-else:
-print("No se encontraron resultados.")
-Evaluación del Modelo
-Evalúa las métricas del modelo:
-python
-Copiar código
-metrics = model.val() # Evaluar el rendimiento del modelo en el conjunto de validación
-Archivar Resultados
-Comprime los resultados del entrenamiento:
-python
-Copiar código
-import shutil
-folder_path = '/content/runs'
-output_filename = '/content/runs.zip'
-shutil.make_archive(output_filename.replace('.zip', ''), 'zip', folder_path)
+#### Evaluación del Modelo
+1. Evalúa las métricas del modelo:
+    ```python
+    metrics = model.val() # Evaluar el rendimiento del modelo en el conjunto de validación
+    ```
+
+### Archivar Resultados
+1. Comprime los resultados del entrenamiento:
+    ```python
+    import shutil
+    folder_path = '/content/runs'
+    output_filename = '/content/runs.zip'
+    shutil.make_archive(output_filename.replace('.zip', ''), 'zip', folder_path)
+    ```
