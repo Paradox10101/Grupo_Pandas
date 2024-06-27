@@ -1,4 +1,17 @@
-# Grupo
+# Grupo - Pandas
+
+## Índice
+- [Integrantes](#integrantes)
+- [YOLO TrashNet](#yolo-trashnet)
+  - [Descripción](#descripción)
+  - [Requisitos Previos](#requisitos-previos)
+  - [Instalación](#instalación)
+  - [Uso](#uso)
+    - [Entrenamiento del Modelo](#entrenamiento-del-modelo)
+    - [Predicción con el Modelo](#predicción-con-el-modelo)
+    - [Evaluación del Modelo](#evaluación-del-modelo)
+  - [Archivar Resultados](#archivar-resultados)
+
 
 ## Integrantes
 - Edgardo Solis
