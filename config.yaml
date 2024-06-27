@@ -1,0 +1,5 @@
+train: /content/train
+val: /content/valid
+
+nc: 6
+names: ['cardboard', 'glass', 'metal', 'paper', 'plastic', 'trash']
