@@ -1,4 +1,10 @@
-# Grupo_Pandas
+# Grupo
+
+## Integrantes
+- Edgardo Solis
+- Charlie Levano
+- Maria Rojas
+- Alexandra Zavala
 
 ## YOLO TrashNet
 
