@@ -1,0 +1,16 @@
+train: C:\Users\ACER\Yo\yoloAugmentation\dataset\train
+val: C:\Users\ACER\Yo\yoloAugmentation\dataset\valid
+
+nc: 6
+names: ['cardboard', 'glass', 'metal', 'paper', 'plastic', 'trash']
+
+# Data augmentation
+augment:
+  - flip_ud: 0.5
+  - flip_lr: 0.5
+  - hsv_h: 0.015
+  - hsv_s: 0.7
+  - hsv_v: 0.4
+  - translate: 0.1
+  - scale: 0.5
+  - rotate: 10.0

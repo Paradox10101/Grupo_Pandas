@@ -1,0 +1,5 @@
+train: C:\Users\ACER\Yo\yolo\datasets\train
+val: C:\Users\ACER\Yo\yolo\datasets\valid
+
+nc: 6
+names: ['cardboard', 'glass', 'metal', 'paper', 'plastic', 'trash']
